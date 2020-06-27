@@ -23,13 +23,16 @@ export default {
     };
   },
   computed: {
-    ...mapState({
+    ...mapState("products", {
       products: state => state.products
     }),
-    ...mapGetters(["productIsInStock"])
+    ...mapGetters("products", ["productIsInStock"])
   },
   methods: {
-    ...mapActions(["fetchProducts", "addProductToCart"])
+    ...mapActions({
+      fetchProducts: "products/fetchProducts",
+      addProductToCart: "cart/addProductToCart"
+    })
   },
   created() {
     this.loading = true;
